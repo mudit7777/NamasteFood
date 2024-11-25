@@ -1,43 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-/**
- * Header
- * - Logo
- * - Navbar
- * Body
- * - Search
- * - Restaurant Cards
- *   - Images
- *   - Name of Res, Rating, Cuisine, etc
- * Footer
- * - Copyright
- * - Links
- * - Address
- * - Contact
- */
-
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img
-          className="logo"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwv45iAbWWwD5glterGTBIO6Q6pnjukcFkGw&s"
-        />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
 const resList = [
   {
     info: {
@@ -932,7 +892,7 @@ const resList = [
       areaName: "Mayur Vihar Phase 3",
       costForTwo: "₹200 for two",
       cuisines: ["Biryani", "North Indian", "Desserts", "Beverages"],
-      avgRating: 4.1,
+      avgRating: 3.8,
       veg: true,
       parentId: "21938",
       avgRatingString: "4.1",
@@ -1019,9 +979,9 @@ const resList = [
         "Desserts",
         "Beverages",
       ],
-      avgRating: 4.3,
+      avgRating: 3.9,
       parentId: "340366",
-      avgRatingString: "4.3",
+      avgRatingString: "3.5",
       totalRatingsString: "77",
       sla: {
         deliveryTime: 35,
@@ -1185,113 +1145,4 @@ const resList = [
   },
 ];
 
-const Body = () => {
-  return (
-    <div className="body">
-      <div className="search"> Search</div>
-      <div className="res-container">
-        {
-          // loop over all restaurants
-          // for each restraunt we have to return a restaurant
-          resList.map((restraunt) => (
-            <RestaurantCard key={restraunt.info.id} resData={restraunt} />
-          ))
-        }
-      </div>
-    </div>
-  );
-};
-
-const RestaurantCard = (props) => {
-  console.log(props);
-  const { resData } = props;
-
-  // optimize the code for resData
-  const {
-    cloudinaryImageId,
-    name,
-    avgRating,
-    cuisines,
-    costForTwo,
-    deliveryTime,
-  } = resData?.info;
-
-  return (
-    <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
-      <img
-        className="res-logo"
-        alt="res-logo"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          cloudinaryImageId
-        }
-      ></img>
-      <h3>{name}</h3>
-      <h4>{cuisines.join(", ")}</h4>
-      <h4>{avgRating + "⭐"}</h4>
-      <h4>{costForTwo}</h4>
-      <h4>{resData.info.sla.deliveryTime} minutes</h4>
-    </div>
-  );
-};
-
-const Footer = () => {
-  return (
-    <footer className="footer">
-      <div className="container">
-        <p>© 2024 Namaste Food. All rights reserved.</p>
-        <ul className="footer-links">
-          <li>
-            <a href="/about">About Us</a>
-          </li>
-          <li>
-            <a href="/contact">Contact</a>
-          </li>
-          <li>
-            <a href="/privacy">Privacy Policy</a>
-          </li>
-          <li>
-            <a href="/terms">Terms & Conditions</a>
-          </li>
-        </ul>
-        <div className="social-icons">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Facebook
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Twitter
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Instagram
-          </a>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-const AppLayout = () => {
-  return (
-    <div className="app">
-      <Header />
-      <Body />
-      <Footer />
-    </div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<AppLayout />);
+export default resList;
