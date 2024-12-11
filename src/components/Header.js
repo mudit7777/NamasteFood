@@ -1,22 +1,24 @@
 import { LOGO_URL } from "../utils/constants";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const Header = () => {
   const [btnNameReact, setBtnNameReact] = useState("Login");
   console.log("Body Header Rendered");
-
+  // Never make hooks outside the component
   useEffect(() => {
     console.log("UseEffect Called ");
-  }, []);
+  }, [btnNameReact]);
 
   // UseEffect will be called every time the component renderes
-  // So if we put dependency array in UseEffect it changes the behaviour of UseEffect
+  // So if we put dependency array in Use   Effect it changes the behaviour of UseEffect
   // If no dependency array, then it's called on every render
   // If Dependency Array, then called on bases of dependency Array, it'll only be called when the dependency changes
   // If the dependency array is {btnNameReact} then it will be called whenever btnNameReact changes
 
   // If the dependency array is an empty = [] ==> then useEffect is called only on initial render(just once )
   // and just Once
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -24,10 +26,18 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
+          <li>
+            <Link to="/">Cart</Link>
+          </li>
           <button
             className="login"
             onClick={() => {
