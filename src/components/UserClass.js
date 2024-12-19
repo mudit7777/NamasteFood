@@ -22,6 +22,10 @@ class UserClass extends Component {
     const data = await fetch("https://api.github.com/users/mudit7777");
     const json = await data.json();
 
+    this.timer = setInterval(() => {
+      console.log("timer calling ");
+    }, 1000);
+
     // set State
     this.setState({
       userInfo: json,
@@ -31,10 +35,12 @@ class UserClass extends Component {
   }
 
   componentDidUpdate() {
-    console.log("Component Did Update");
+    console.log("Component Will Update");
   }
 
   componentWillUnmount() {
+    clearInterval(this.timer);
+
     console.log("Component Will Unmount");
   }
 
@@ -54,19 +60,16 @@ class UserClass extends Component {
 export default UserClass;
 
 /**
- * ---Mounting---
- * Constructor (dummy)
- * Render (dummy)
- *    <HTML Dummy>
- * Component Did Mount
- *    <API Call>
- *    <this.setState> -> State Variable Update
- * Once the this.setState is called, it calls the render() method again
+ * Parent Constructor
+ * Parent Render
+ *    First Child Constructor
+ *    First Child Render
+ *    Second Child Contructor
+ *    Second Child Render
  *
- * --UPDATE
+ *    DOM UPDATED For Children
  *
- * render(API Data)
- * <HTML (new API Data)
- * componentDidUpdate
- *
+ *    first child componentDidMount
+ *    second child componentDidMount
+ * Parent componentDidMount
  */

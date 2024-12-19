@@ -2,7 +2,7 @@ import UserClass from "./UserClass";
 import { Component } from "react";
 
 class About extends Component {
-  // class constructor
+  // About class constructors
   constructor(props) {
     super(props);
     console.log("Parent Constructor");
@@ -21,7 +21,7 @@ class About extends Component {
         <UserClass
           name={"First (Class)"}
           location={"FirstPur"}
-          contact={"7777788888"}
+          contact={"8788866667"}
         />
       </div>
     );
