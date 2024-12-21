@@ -1,5 +1,5 @@
 // Importing the name exports
-import { CDN_URL } from "../utils/constants";
+import { CDN_URL } from "../Utils/Constants";
 
 const RestaurantCard = (props) => {
   console.log(props);

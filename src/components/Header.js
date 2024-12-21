@@ -1,6 +1,7 @@
-import { LOGO_URL } from "../utils/constants";
+import { LOGO_URL } from "../Utils/Constants";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import useOnlineStatus from "../Utils/useOnlineStatus";
 
 const Header = () => {
   const [btnNameReact, setBtnNameReact] = useState("Login");
@@ -9,6 +10,8 @@ const Header = () => {
   useEffect(() => {
     console.log("UseEffect Called ");
   }, [btnNameReact]);
+
+  const onlineStatus = useOnlineStatus();
 
   // UseEffect will be called every time the component renderes
   // So if we put dependency array in Use   Effect it changes the behaviour of UseEffect
@@ -26,6 +29,7 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+          <li>Online Status : {onlineStatus ? "🟢" : "🔴"}</li>
           <li>
             <Link to="/">Home</Link>
           </li>
