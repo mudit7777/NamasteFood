@@ -12,7 +12,8 @@ const Body = () => {
 
   // Whenever state variable update, react triggers a reconcilation cycle(re-renders the component)
 
-  console.log("Body Rendered ");
+  console.log("Body Rendered ", listOfRestaurants);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -25,9 +26,7 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(
-      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-    );
+
     // Optional Chaining
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -50,17 +49,18 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
+            className="px-4 py-2 bg-green-500 m-4 rounded-lg"
             onClick={() => {
               console.log(searchText);
               const filteredRestraunt = listOfRestaurants.filter((res) =>
@@ -77,21 +77,24 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            // Filter logic here to have rating above 4.2
-            const filteredResList = listOfRestaurants.filter(
-              (res) => res.info.avgRating > 4
-            );
-            setFilteredRestraunts(filteredResList);
-            console.log(filteredResList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+        <div className="flex items-center rounded-m">
+          <button
+            className="px-4 py-2 bg-gray-100 m-4 rounded-lg"
+            onClick={() => {
+              className = "";
+              // Filter logic here to have rating above 4.2
+              const filteredResList = listOfRestaurants.filter(
+                (res) => res.info.avgRating > 4.5
+              );
+              setFilteredRestraunts(filteredResList);
+              console.log(filteredResList);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap ">
         {
           // loop over all restaurants
           // for each restraunt we have to return a restaurant
