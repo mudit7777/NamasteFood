@@ -1,3 +1,4 @@
+import UserContext from "../Utils/UserContext";
 import UserClass from "./UserClass";
 import { Component } from "react";
 
@@ -16,6 +17,15 @@ class About extends Component {
     console.log("Parent Render");
     return (
       <div>
+        <div>
+          Logged In User
+          <UserContext.Consumer>
+            {/*this takes in JSX  */}
+            {({ loggedInUser }) => (
+              <h1 className="font-bold">{loggedInUser}</h1>
+            )}
+          </UserContext.Consumer>
+        </div>
         <h1>This is About Component</h1>
 
         <UserClass

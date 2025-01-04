@@ -1,8 +1,9 @@
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState, useContext } from "react";
 import { Link } from "react-router";
 import useOnlineStatus from "../Utils/useOnlineStatus";
+import UserContext from "../Utils/UserContext";
 
 const Body = () => {
   // State Variable / Local State Variable  - Super Powerful Variable
@@ -45,6 +46,9 @@ const Body = () => {
       </h1>
     );
 
+  // UseContext
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -77,7 +81,7 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div className="flex items-center rounded-m">
+        <div className="search m-4 p-4 flex items-center rounded-m">
           <button
             className="px-4 py-2 bg-gray-100 m-4 rounded-lg"
             onClick={() => {
@@ -92,6 +96,15 @@ const Body = () => {
           >
             Top Rated Restaurants
           </button>
+        </div>
+        <div className="search m-4 p-4 flex items-center rounded-m">
+          <label>UserName : </label>
+          <input
+            type="text"
+            className="border border-black p-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          ></input>
         </div>
       </div>
       <div className="flex flex-wrap ">

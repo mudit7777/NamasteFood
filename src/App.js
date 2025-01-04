@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,7 +8,9 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
+import { useState } from "react";
 import { lazy, Suspense } from "react";
+import UserContext from "./Utils/UserContext";
 // import Grocery from "./components/Grocery";
 
 /**
@@ -36,11 +38,26 @@ const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+
+  useEffect(() => {
+    // make an API Call
+    const data = {
+      name: "Mudit Arora",
+    };
+    setUserName(data.name);
+  }, []);
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    // In order to use this context all over the app,
+    // Just wrap this inside <UserContext.Provider>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="app">
+        <UserContext.Provider value={{ loggedInUser: "Elon" }}>
+          <Header />
+        </UserContext.Provider>
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 

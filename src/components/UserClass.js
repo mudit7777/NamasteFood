@@ -30,8 +30,6 @@ class UserClass extends Component {
     this.setState({
       userInfo: json,
     });
-
-    console.log(json);
   }
 
   componentDidUpdate() {
