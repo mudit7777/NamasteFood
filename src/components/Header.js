@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router";
 import useOnlineStatus from "../Utils/useOnlineStatus";
 import UserContext from "../Utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnNameReact, setBtnNameReact] = useState("Login");
@@ -16,6 +17,11 @@ const Header = () => {
 
   const data = useContext(UserContext);
   console.log(data);
+
+  // Selector is nothing but a hook, will be used to subscribe to the redux store
+  // Subscribing to the redux store using a Selector (useSelector hook)
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   // UseEffect will be called every time the component renderes
   // So if we put dependency array in Use   Effect it changes the behaviour of UseEffect
@@ -46,8 +52,8 @@ const Header = () => {
           <li className="px-4">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li className="px-4">
-            <Link to="/">Cart</Link>
+          <li className="px-4 font-bold">
+            <Link to="/">🛒({cartItems.length} items)</Link>
           </li>
           <li className="px-4">
             <button

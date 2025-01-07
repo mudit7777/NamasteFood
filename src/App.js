@@ -11,6 +11,8 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import { useState } from "react";
 import { lazy, Suspense } from "react";
 import UserContext from "./Utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./Utils/appStore";
 // import Grocery from "./components/Grocery";
 
 /**
@@ -49,15 +51,18 @@ const AppLayout = () => {
   }, []);
   return (
     // In order to use this context all over the app,
-    // Just wrap this inside <UserContext.Provider>
-    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-      <div className="app">
-        <UserContext.Provider value={{ loggedInUser: "Elon" }}>
-          <Header />
-        </UserContext.Provider>
-        <Outlet />
-      </div>
-    </UserContext.Provider>
+    // Wrap your app in <Provider> and pass the store as a prop.
+
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          <UserContext.Provider value={{ loggedInUser: "Elon" }}>
+            <Header />
+          </UserContext.Provider>
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
