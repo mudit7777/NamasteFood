@@ -1,7 +1,18 @@
 import React from "react";
 import { CDN_URL } from "../Utils/Constants";
+import { addItem } from "../Utils/cartSlice";
+import { useDispatch } from "react-redux";
 
 const ItemsList = ({ items }) => {
+  // useDispatch is a hook from react-redux
+  // used to dispatch an action which will call a reducer function
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    // Dispatch an action
+    dispatch(addItem(item));
+  };
+
   return (
     <div>
       {items.map((item) => (
@@ -24,7 +35,10 @@ const ItemsList = ({ items }) => {
           </div>
           <div className="w-3/12 p-4">
             <div className="absolute">
-              <button className="p-2 shadow-lg mx-14  rounded-lg text-white bg-black">
+              <button
+                className="p-2 shadow-lg mx-14  rounded-lg text-white bg-black"
+                onClick={() => handleAddItem(item)}
+              >
                 Add +
               </button>
             </div>
