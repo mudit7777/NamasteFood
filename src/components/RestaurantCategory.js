@@ -1,7 +1,8 @@
-import ItemsList from "./ItemList";
+import ItemsList from "../ItemList";
 import { useState, useEffect } from "react";
 
 const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
+  console.log("data", data);
   // expand collapse items
   const [setShowItems] = useState(false);
   const handleClick = () => {

@@ -13,7 +13,8 @@ import { lazy, Suspense } from "react";
 import UserContext from "./Utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./Utils/appStore";
-import Cart from "./Cart";
+import Cart from "./components/Cart";
+// import Cart from ".components/Cart";
 // import Grocery from "./components/Grocery";
 
 /**
@@ -57,7 +58,7 @@ const AppLayout = () => {
     <Provider store={appStore}>
       <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
         <div className="app">
-          <UserContext.Provider value={{ loggedInUser: "Elon" }}>
+          <UserContext.Provider value={{ loggedInUser: userName }}>
             <Header />
           </UserContext.Provider>
           <Outlet />

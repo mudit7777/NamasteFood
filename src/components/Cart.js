@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import ItemsList from "./components/ItemList";
-import { clearCart } from "./Utils/cartSlice";
+import ItemsList from "./ItemList";
+import { clearItem } from "../Utils/cartSlice";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems, "CartItems");
   const dispatch = useDispatch();
   const handleClearCart = () => {
-    dispatch(clearCart());
+    dispatch(clearItem());
   };
   return (
     <div className="text-center">
@@ -22,7 +23,9 @@ const Cart = () => {
         >
           Clear Cart
         </button>
-        {cartItems.length == 0 && <h1>Your cart is empty, Please add items</h1>}
+        {cartItems?.length === 0 && (
+          <h1>Your cart is empty, Please add items</h1>
+        )}
         <ItemsList items={cartItems} />{" "}
       </div>
     </div>
